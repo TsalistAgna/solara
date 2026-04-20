@@ -1,5 +1,5 @@
 //
-//  List.swift
+//  ListPage.swift
 //  solara_weather_remix
 // 
 //  Created by Annisa Rahmadani on 19/04/26.
@@ -15,7 +15,7 @@ struct ListTry {
     var endTime : String
 }
 
-struct List: View {
+struct ListPage: View {
     var uvLocationData : [ListTry] = [
         ListTry(location: "Canggu", temperature: 32, uvIndex: 7, startTime: "10:00", endTime: "12:15"),
         ListTry(location: "Gianyar", temperature: 27, uvIndex: 4, startTime: "15:10", endTime: "16:10"),
@@ -80,5 +80,5 @@ struct List: View {
 }
 
 #Preview {
-    List()
+    ListPage()
 }
