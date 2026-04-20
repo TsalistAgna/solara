@@ -75,7 +75,7 @@ struct List: View {
                 }
                     }
                 }
-            .padding()
+        .padding()
         }
 }
 
