@@ -4,6 +4,25 @@
 //
 //  Created by Annisa Rahmadani on 20/04/26.
 //
+//struct CheckboxToggleStyle: ToggleStyle {
+//    func makeBody(configuration: Configuration) -> some View {
+//        Button {
+//            configuration.isOn.toggle()
+//        } label: {
+//            HStack {
+//                Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
+//                    .foregroundColor(configuration.isOn ? .blue : .secondary)
+//                configuration.label
+//            }
+//        }
+//        .buttonStyle(.plain) // Removes default button highlighting
+//    }
+//}
+//
+//yg bawah ini ditaruh di dalam $task in
+//
+//                        Toggle(task.name, isOn: $task.isChecked)
+//                                        .toggleStyle(CheckboxToggleStyle())
 
 
 import SwiftUI
@@ -23,20 +42,7 @@ struct Task: Identifiable {
     var isChecked: Bool = false
 }
 
-struct CheckboxToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        Button {
-            configuration.isOn.toggle()
-        } label: {
-            HStack {
-                Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
-                    .foregroundColor(configuration.isOn ? .blue : .secondary)
-                configuration.label
-            }
-        }
-        .buttonStyle(.plain) // Removes default button highlighting
-    }
-}
+
 
 struct LocationChecker: View {
     @State var uvCircle: Double = 0.60
@@ -51,6 +57,7 @@ struct LocationChecker: View {
                            startPoint: .top,
                            endPoint: .bottom)
             .ignoresSafeArea()
+            
             VStack {
                 HStack {
                     Button(action: {}) {
@@ -68,7 +75,7 @@ struct LocationChecker: View {
                             .foregroundColor(Color.black)
                             .cornerRadius(.infinity)
                     }
-                        
+                    
                 }
                 VStack {
                     Text("Kuta")
@@ -98,25 +105,23 @@ struct LocationChecker: View {
                 VStack {
                     Text("Recommended Protections:")
                     List($tasks) { $task in
-                        Toggle(task.name, isOn: $task.isChecked)
-                                        .toggleStyle(CheckboxToggleStyle())
                         
-//                         HStack {
-//                            Text(task.name)
-//                            Spacer()
-//                            Image(systemName: task.isChecked ? "checkmark.square" :"square")
-//                                .onTapGesture {
-//                                    task.isChecked.toggle()
-//                                }
-                        // kalo yang di bawah itu checkmarknya di kanan sesuai hifi
+                        HStack {
+                            Text(task.name)
+                            Spacer()
+                            Image(systemName: task.isChecked ? "checkmark.square" :"square.dashed")
+                                .onTapGesture {
+                                    task.isChecked.toggle()
+                                }
+                            // kalo yang di bawah itu checkmarknya di kanan sesuai hifi
                         }
                     }
                 }
             }
         }
     }
-
-
-#Preview {
-    LocationChecker()
 }
+    
+    #Preview {
+        LocationChecker()
+    }
