@@ -23,6 +23,21 @@ struct Task: Identifiable {
     var isChecked: Bool = false
 }
 
+struct CheckboxToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        Button {
+            configuration.isOn.toggle()
+        } label: {
+            HStack {
+                Image(systemName: configuration.isOn ? "checkmark.square.fill" : "square")
+                    .foregroundColor(configuration.isOn ? .blue : .secondary)
+                configuration.label
+            }
+        }
+        .buttonStyle(.plain) // Removes default button highlighting
+    }
+}
+
 struct LocationChecker: View {
     @State var uvCircle: Double = 0.60
     @State private var tasks = [Task(name: "Sunscreen", isChecked: false), Task(name: "Umbrella", isChecked: false), Task(name: "Sunglasses", isChecked: false), Task(name: "Hat", isChecked: false)]
@@ -47,7 +62,7 @@ struct LocationChecker: View {
                     }
                     Spacer()
                     Button(action: {}) {
-                        Image(systemName: "plus")
+                        Image(systemName: "checkmark")
                             .padding(10)
                             .background(Color.white)
                             .foregroundColor(Color.black)
@@ -83,20 +98,24 @@ struct LocationChecker: View {
                 VStack {
                     Text("Recommended Protections:")
                     List($tasks) { $task in
-                        HStack {
-                            Text(task.name)
-                            Spacer()
-                            Image(systemName: task.isChecked ? "checkmark.square" :"square")
-                                .onTapGesture {
-                                    task.isChecked.toggle()
-                                }
+                        Toggle(task.name, isOn: $task.isChecked)
+                                        .toggleStyle(CheckboxToggleStyle())
+                        
+//                         HStack {
+//                            Text(task.name)
+//                            Spacer()
+//                            Image(systemName: task.isChecked ? "checkmark.square" :"square")
+//                                .onTapGesture {
+//                                    task.isChecked.toggle()
+//                                }
+                        // kalo yang di bawah itu checkmarknya di kanan sesuai hifi
                         }
                     }
                 }
             }
         }
     }
-}
+
 
 #Preview {
     LocationChecker()
