@@ -15,7 +15,7 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
             Text("Welcome to Solara hahahaha")
         }
-        .padding()
+        .tint(Color(red: 1.0, green: 0.729, blue: 0.004))
     }
 }
 
