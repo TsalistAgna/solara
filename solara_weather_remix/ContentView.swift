@@ -9,16 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView{
-            HomePage()
-                .tabItem{
-                    Label("Home", systemImage: "house.fill")
-                }
-            
-            ListPage()
-                .tabItem{
-                    Label("List", systemImage: "list.bullet")
-                }
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("Welcome to Solara hahahaha")
         }
         .tint(Color(red: 1.0, green: 0.729, blue: 0.004))
     }
